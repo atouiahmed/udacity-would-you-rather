@@ -8,8 +8,8 @@ class Login extends Component {
             <AppWrapper>
                 <div className="card">
                     <div className="card-header text-center ">
-                        <h3 className="fs-5 mt-3"> Welcome to the Would You Rather App!</h3>
-                        <p>Please sign to continue</p>
+                        <h3 className="fs-5 mt-2"> Welcome to the Would You Rather App!</h3>
+                        <p className="p-0 m-0 my-2">Please sign to continue</p>
                     </div>
                     <div className="card-body">
                         <div className="text-center mt-3">
@@ -25,7 +25,7 @@ class Login extends Component {
                                 </select>
                             </div>
                             <div className="d-grid gap-2 mt-3">
-                                <button type="submit" className="btn btn-success mt-2">Submit</button>
+                                <button type="submit" className="btn btn-success mt-2">Login</button>
                             </div>
 
                         </form>

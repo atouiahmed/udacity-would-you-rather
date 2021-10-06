@@ -7,11 +7,13 @@ import Home from "./Views/Home";
 import LeaderBoard from "./Views/LeaderBoard";
 import NewQuestion from "./Views/NewQuestion";
 import Login from "./Views/Login";
+import LoadingBar from "react-redux-loading";
 
 function App() {
     return (
         <Router>
             <Nav/>
+            <LoadingBar/>
             <div>
                 <Route path="/" exact component={Home}/>
                 <Route path="/login" component={Login}/>

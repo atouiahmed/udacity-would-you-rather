@@ -1,9 +1,20 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import AppWrapper from "../components/AppWrapper";
+import {connect} from "react-redux";
+import {handleUsersData} from "../actions/shared";
 
 class Login extends Component {
+    state = {
+        users: [],
+    }
+
+    componentDidMount() {
+        this.props.dispatch(handleUsersData())
+    }
+
     render() {
+        const {usersIds, users} = this.props;
         return (
             <AppWrapper>
                 <div className="card">
@@ -18,10 +29,10 @@ class Login extends Component {
                         <form className="mt-4">
 
                             <div className="mt-2">
-                                <select className="form-control" name="" id="">
-                                    <option value="">one1</option>
-                                    <option value="">one2</option>
-                                    <option value="">one3</option>
+                                <select className="form-select" name="" id="">
+                                    {usersIds.map(u => (
+                                        <option key={u} value={u}>{users[u].name}</option>
+                                    ))}
                                 </select>
                             </div>
                             <div className="d-grid gap-2 mt-3">
@@ -36,4 +47,12 @@ class Login extends Component {
     }
 }
 
-export default Login;
+function mapStateToProps({users}) {
+
+    return {
+        users,
+        usersIds: Object.keys(users)
+    }
+}
+
+export default connect(mapStateToProps)(Login)

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import AppWrapper from "../components/AppWrapper";
 import {connect} from "react-redux";
 import {handleUsersData} from "../actions/shared";
+import {setAuthUser} from "../actions/authedUser";
 
 class Login extends Component {
     state = {
@@ -10,7 +11,22 @@ class Login extends Component {
     }
 
     componentDidMount() {
+        const {usersIds, users} = this.props;
         this.props.dispatch(handleUsersData())
+    }
+
+    handleSelectLogin = (e) => {
+        let auth_id = e.target.value;
+        this.setState({auth_id: auth_id})
+
+    }
+    doLogin = (e) => {
+        e.preventDefault();
+        let {auth_id} = this.state;
+        let {default_auth, users} = this.props;
+        auth_id = auth_id ? users[auth_id] : default_auth;
+        this.props.dispatch(setAuthUser(auth_id));
+        this.props.history.push(`/`)
     }
 
     render() {
@@ -26,17 +42,18 @@ class Login extends Component {
                         <div className="text-center mt-3">
                             <img className="my-auto" src="logo.jpg" alt="" width="128px"/>
                         </div>
-                        <form className="mt-4">
+                        <form className="mt-4" onSubmit={this.doLogin}>
 
                             <div className="mt-2">
-                                <select className="form-select" name="" id="">
+                                <select className="form-select" onChange={this.handleSelectLogin}>
                                     {usersIds.map(u => (
                                         <option key={u} value={u}>{users[u].name}</option>
                                     ))}
                                 </select>
                             </div>
                             <div className="d-grid gap-2 mt-3">
-                                <button type="submit" className="btn btn-success mt-2">Login</button>
+                                <button type="submit" className="btn btn-success mt-2">Login
+                                </button>
                             </div>
 
                         </form>
@@ -48,10 +65,12 @@ class Login extends Component {
 }
 
 function mapStateToProps({users}) {
-
+    let usersIds = Object.keys(users);
+    let default_auth = users[usersIds[0]];
     return {
         users,
-        usersIds: Object.keys(users)
+        usersIds,
+        default_auth
     }
 }
 

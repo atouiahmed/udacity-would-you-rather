@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import AppWrapper from "../components/AppWrapper";
 
 class NewQuestion extends Component {
+
     render() {
         return (
             <AppWrapper>
@@ -13,7 +14,7 @@ class NewQuestion extends Component {
                     <div className="card-body">
                         <p>Complete the question</p>
                         <h3>Would you rather...</h3>
-                        <form className="mt-4">
+                        <form className="mt-4" >
                             <div className="mb-2">
                                 <input type="text" className="form-control" placeholder="Enter option one here"/>
                             </div>

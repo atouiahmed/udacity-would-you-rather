@@ -40,9 +40,16 @@
 .dropdown-toggle::after {
     display: none !important;
 }
-.option-result-bg-active{
+
+.option-result-bg-active {
     background: #d1e7dd;
 }
-.option-result-text-active{
+
+.option-result-text-active {
     color: #d1e7dd;
+}
+
+.card-link,.card-link:hover {
+    text-decoration: none!important;
+    color: inherit!important;
 }

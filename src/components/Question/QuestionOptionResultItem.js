@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 
 class QuestionOptionResultItem extends Component {
     render() {
-        const {option, all_options} = this.props;
-        const total_votes = all_options.optionOne.votes.length + all_options.optionTwo.votes.length;
+        const {option, question,is_winner} = this.props;
+        const total_votes = question.optionOne.votes.length + question.optionTwo.votes.length;
         const percent = total_votes > 0 ? Math.round((option.votes.length * 100) / total_votes) : 0;
-        const is_winner = true;
         const bg_class_active = is_winner ? 'option-result-bg-active' : '';
         const progress_class = 'progress-bar bg-success';
         return (
@@ -26,7 +25,7 @@ class QuestionOptionResultItem extends Component {
 
 QuestionOptionResultItem.propTypes = {
     option: PropTypes.object.isRequired,
-    all_options: PropTypes.number.isRequired,
+    question: PropTypes.object.isRequired,
 };
 
 export default QuestionOptionResultItem;

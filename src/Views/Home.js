@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import AppWrapper from "../components/AppWrapper";
-import QuestionViewItem from "../components/Question/QuestionViewItem";
-import LeaderBoardItem from "../components/LeaderBoard/LeaderBoardItem";
 import QuestionItem from "../components/Question/QuestionItem";
-
+import {connect} from "react-redux";
+import {handleQuestionsData} from "../actions/questions";
 class Home extends Component {
+    componentDidMount() {
+        this.props.dispatch(handleQuestionsData())
+    }
+
     render() {
+        const {questionsIds, questions} = this.props;
         return (
             <AppWrapper>
 
@@ -26,38 +30,21 @@ class Home extends Component {
                 <div className="tab-content pt-3 " id="myTabContent">
 
                     <div className="tab-pane fade show active" id="aq" role="tabpanel" aria-labelledby="aq-tab">
-                        <QuestionItem
-                            question={{
-                                id: '6ni6ok3ym7mf1p33lnez',
-                                author: 'johndoe',
-                                timestamp: 1468479767190,
-                                optionOne: {
-                                    votes: [],
-                                    text: 'become a superhero',
-                                },
-                                optionTwo: {
-                                    votes: ['johndoe', 'sarahedo'],
-                                    text: 'become a supervillain'
-                                }
-                            }}
-                        />
+                        {questionsIds.map(q_id => (
+                            <QuestionItem
+                                key={q_id}
+                                id={q_id}
+                            />
+                        ))}
+
                     </div>
                     <div className="tab-pane fade" id="uq" role="tabpanel" aria-labelledby="uq-tab">
-                        <QuestionItem
-                            question={{
-                                id: '6ni6ok3ym7mf1p33lnez',
-                                author: 'johndoe',
-                                timestamp: 1468479767190,
-                                optionOne: {
-                                    votes: [],
-                                    text: 'become a superhero',
-                                },
-                                optionTwo: {
-                                    votes: ['johndoe', 'sarahedo'],
-                                    text: 'become a supervillain'
-                                }
-                            }}
-                        />
+                        {questionsIds.map(q_id => (
+                            <QuestionItem
+                                key={q_id}
+                                id={q_id}
+                            />
+                        ))}
                     </div>
                 </div>
 
@@ -69,4 +56,18 @@ class Home extends Component {
 
 Home.propTypes = {};
 
-export default Home;
+function mapStateToProps({questions, authedUser}) {
+    let questionsIds = Object.keys(questions);
+    // let unanswered_questions = questions.filter(q => !q.optionOne.votes.length && !q.optionTwo.votes.length);
+    // let UnAnsweredQuestionsIds = Object.keys(unanswered_questions);
+
+    return {
+        questionsIds,
+        // UnAnsweredQuestionsIds,
+        questions,
+        // unanswered_questions,
+        authedUser
+    }
+}
+
+export default connect(mapStateToProps)(Home)

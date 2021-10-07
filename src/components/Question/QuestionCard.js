@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import QuestionOptionItem from "./QuestionOptionItem";
 import QuestionItemForm from "./QuestionItemForm";
 import QuestionItemFormResult from "./QuestionItemFormResult";
+import {connect} from "react-redux";
 
 class QuestionCard extends Component {
     render() {
-        const {author} = this.props;
+        const {question,users} = this.props;
+        let author = users[question.author];
         return (
             <div className="card">
                 <div className="card-header">
@@ -28,6 +30,13 @@ class QuestionCard extends Component {
 }
 
 QuestionCard.propTypes = {
-    author: PropTypes.object.isRequired,
+    question: PropTypes.object.isRequired,
 };
-export default QuestionCard;
+
+function mapStateToProps({users}) {
+    return {
+        users,
+    }
+}
+
+export default connect(mapStateToProps)(QuestionCard)

@@ -5,21 +5,26 @@ import QuestionOptionResultItem from "./QuestionOptionResultItem";
 
 class QuestionItemFormResult extends Component {
     render() {
-        const {options} = this.props;
-        let total_votes = options.optionOne.votes.length + options.optionTwo.votes.length;
-        let percent = options.optionOne.votes.length + options.optionTwo.votes.length;
+        const {question} = this.props;
+        let options = question;
         return (
             <form action="">
                 <h5 className="card-title">Result:</h5>
 
-                <QuestionOptionResultItem option={options.optionOne} all_options={options}/>
-                <QuestionOptionResultItem option={options.optionTwo}  all_options={options}/>
+                <QuestionOptionResultItem option={options.optionOne}
+                                          question={question}
+                                          is_winner={options.optionOne.votes.length > options.optionTwo.votes.length}
+                />
+                <QuestionOptionResultItem option={options.optionTwo}
+                                          question={question}
+                                          is_winner={options.optionOne.votes.length < options.optionTwo.votes.length}
+                />
             </form>
         );
     }
 }
 
 QuestionItemFormResult.propTypes = {
-    options: PropTypes.object.isRequired,
+    question: PropTypes.object.isRequired,
 };
 export default QuestionItemFormResult;

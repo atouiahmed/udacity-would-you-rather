@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import AppWrapper from "../components/AppWrapper";
 import {connect} from "react-redux";
-import {handleUsersData} from "../actions/shared";
+import {handleUsersData} from "../actions/users";
 import {setAuthUser} from "../actions/authedUser";
 
 class Login extends Component {
@@ -10,10 +10,6 @@ class Login extends Component {
         users: [],
     }
 
-    componentDidMount() {
-        const {usersIds, users} = this.props;
-        this.props.dispatch(handleUsersData())
-    }
 
     handleSelectLogin = (e) => {
         let auth_id = e.target.value;
@@ -64,13 +60,14 @@ class Login extends Component {
     }
 }
 
-function mapStateToProps({users}) {
+function mapStateToProps({users,authedUser}) {
     let usersIds = Object.keys(users);
     let default_auth = users[usersIds[0]];
     return {
         users,
         usersIds,
-        default_auth
+        default_auth,
+        authedUser
     }
 }
 

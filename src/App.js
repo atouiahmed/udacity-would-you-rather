@@ -8,20 +8,45 @@ import LeaderBoard from "./Views/LeaderBoard";
 import NewQuestion from "./Views/NewQuestion";
 import Login from "./Views/Login";
 import LoadingBar from "react-redux-loading";
+import {createBrowserHistory} from 'history'
+import ProtectedRoute from "./components/ProtectedRoute";
+import {connect} from "react-redux";
+import {handleUsersData} from "./actions/users";
+import QuestionView from "./Views/QuestionView";
 
-function App() {
-    return (
-        <Router>
-            <Nav/>
-            <LoadingBar/>
-            <div>
-                <Route path="/" exact component={Home}/>
-                <Route path="/login" component={Login}/>
-                <Route path="/questions/add" component={NewQuestion}/>
-                <Route path="/leaderboard" component={LeaderBoard}/>
-            </div>
-        </Router>
-    );
+const history = createBrowserHistory()
+
+
+class App extends Component {
+
+    componentDidMount() {
+        this.props.dispatch(handleUsersData())
+    }
+
+    render() {
+        const {authedUser} = this.props;
+        return (
+
+            <Router history={history}>
+                <Nav/>
+                <LoadingBar/>
+                <div>
+                    <ProtectedRoute path="/" exact component={Home} authedUser={authedUser}/>
+                    <Route path="/login" component={Login}/>
+                    <ProtectedRoute path="/questions/add" component={NewQuestion} authedUser={authedUser}/>
+                    <ProtectedRoute path="/leaderboard" component={LeaderBoard} authedUser={authedUser}/>
+                    <ProtectedRoute path="/question/:id" component={QuestionView} authedUser={authedUser}/>
+                </div>
+            </Router>
+        )
+    }
 }
 
-export default App;
+
+function mapStateToProps({authedUser}) {
+    return {
+        authedUser
+    }
+}
+
+export default connect(mapStateToProps)(App)

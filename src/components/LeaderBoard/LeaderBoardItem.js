@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import LeaderBoardCard from "./LeaderBoardCard";
+import {withRouter} from "react-router-dom";
+import {connect} from "react-redux";
 
 class LeaderBoardItem extends Component {
     state = {
@@ -10,13 +12,16 @@ class LeaderBoardItem extends Component {
 
     render() {
         const {author} = this.props;
+        const total_questions = author.questions.length;
+        const total_answers = Object.keys(author.answers).length;
+        const score = total_questions + total_answers;
         return (
 
             <LeaderBoardCard author={author}>
                 <div className="col-6 border-1 border-start">
-                    <p>Answered questions: 10</p>
+                    <p>Answered questions: {total_answers}</p>
                     <hr/>
-                    <p>Created questions: 10</p>
+                    <p>Created questions: {total_questions}</p>
                 </div>
                 <div className="col-3 border-1 border-start leader-board-score">
                     <div className="card">
@@ -25,7 +30,7 @@ class LeaderBoardItem extends Component {
                         </div>
                         <div className="card-body p-2">
                             <div className="rounded-circle bg-success ">
-                                <p className="text-white text-center d-flex">10</p>
+                                <p className="text-white text-center d-flex">{score}</p>
                             </div>
                         </div>
                     </div>
@@ -37,6 +42,16 @@ class LeaderBoardItem extends Component {
 }
 
 LeaderBoardItem.propTypes = {
-    author: PropTypes.object.isRequired,
+    id: PropTypes.string.isRequired,
 };
-export default LeaderBoardItem;
+
+function mapStateToProps({authedUser, users, questions}, {id}) {
+    const author = users[id];
+
+    return {
+        authedUser,
+        author
+    };
+}
+
+export default withRouter(connect(mapStateToProps)(LeaderBoardItem))

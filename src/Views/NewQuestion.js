@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import AppWrapper from "../components/AppWrapper";
 import {handleCreateQuestion} from "../actions/questions";
 import {connect} from "react-redux";
@@ -7,13 +6,30 @@ import authedUser from "../reducers/authedUser";
 
 class NewQuestion extends Component {
 
+    state = {
+        errors: {},
+        optionOneText: '',
+        optionTwoText: '',
+    }
     handleInputChange = (option, e) => {
         let text = e.target.value;
         this.setState({[option]: text})
     }
     submitQuestion = (e) => {
         const {dispatch, authedUser} = this.props;
+        const {optionOneText, optionTwoText} = this.state;
+        let errors = {};
         e.preventDefault();
+
+        if (optionOneText === '')
+            errors.optionOneText = true;
+        if (optionTwoText === '')
+            errors.optionTwoText = true;
+
+        if (Object.keys(errors).length) {
+            this.setState({errors: errors});
+            return;
+        }
         let question = {
             author: authedUser.id,
             ...this.state
@@ -24,6 +40,7 @@ class NewQuestion extends Component {
     }
 
     render() {
+        const {errors} = this.state;
         return (
             <AppWrapper>
                 <div className="card">
@@ -37,11 +54,17 @@ class NewQuestion extends Component {
                             <div className="mb-2">
                                 <input type="text" className="form-control" placeholder="Enter option one here"
                                        onChange={(e) => this.handleInputChange('optionOneText', e)}/>
+                                {errors.optionOneText && (
+                                    <p className="text-danger">This field is required!</p>
+                                )}
                             </div>
                             <p className="text-center fw-bold m-0 p-0">Or</p>
                             <div className="mt-2">
                                 <input type="text" className="form-control" placeholder="Enter option two here"
                                        onChange={(e) => this.handleInputChange('optionTwoText', e)}/>
+                                {errors.optionTwoText && (
+                                    <p className="text-danger">This field is required!</p>
+                                )}
                             </div>
                             <div className="d-grid gap-2 mt-3">
                                 <button type="submit" className="btn btn-success mt-2">Submit</button>

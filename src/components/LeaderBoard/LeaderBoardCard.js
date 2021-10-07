@@ -5,9 +5,9 @@ class LeaderBoardCard extends Component {
     render() {
         const {author} = this.props;
         return (
-            <div className="card">
+            <div className="card mt-2">
                 <div className="card-header">
-                    {author.name} asks:
+                    <h3>      {author.name} </h3>
                 </div>
                 <div className="card-body">
                     <div className="row">

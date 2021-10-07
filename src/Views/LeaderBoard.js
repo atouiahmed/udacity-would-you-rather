@@ -2,22 +2,22 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import AppWrapper from "../components/AppWrapper";
 import LeaderBoardItem from "../components/LeaderBoard/LeaderBoardItem";
+import {connect} from "react-redux";
+import {handleUsersData} from "../actions/users";
 
 class LeaderBoard extends Component {
+    componentDidMount() {
+        this.props.dispatch(handleUsersData())
+    }
+
     render() {
+        const {usersIds} = this.props;
         return (
             <AppWrapper>
-                <LeaderBoardItem author={{
-                    id: 'johndoe',
-                    name: 'John Doe',
-                    avatarURL: 'https://i.pravatar.cc/150?u=125',
-                    answers: {
-                        "xj352vofupe1dqz9emx13r": 'optionOne',
-                        "vthrdm985a262al8qx3do": 'optionTwo',
-                        "6ni6ok3ym7mf1p33lnez": 'optionTwo'
-                    },
-                    questions: ['6ni6ok3ym7mf1p33lnez', 'xj352vofupe1dqz9emx13r'],
-                }}/>
+                {usersIds.map(u_id => (
+                    <LeaderBoardItem key={u_id} id={u_id}/>
+                ))}
+
             </AppWrapper>
         );
     }
@@ -25,4 +25,20 @@ class LeaderBoard extends Component {
 
 LeaderBoard.propTypes = {};
 
-export default LeaderBoard;
+
+function mapStateToProps({users, authedUser}) {
+    let usersIds = Object.keys(users);
+    console.log('users', users)
+    usersIds.sort((a, b) => {
+        let a_score = users[a].questions.length + Object.keys(users[a].answers).length;
+        let b_score = users[b].questions.length + Object.keys(users[b].answers).length;
+        return b_score - a_score;
+    });
+    return {
+        users,
+        usersIds,
+        authedUser
+    }
+}
+
+export default connect(mapStateToProps)(LeaderBoard)

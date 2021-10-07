@@ -11,11 +11,11 @@ class QuestionItemFormResult extends Component {
             <form action="">
                 <h5 className="card-title">Result:</h5>
 
-                <QuestionOptionResultItem option={options.optionOne}
+                <QuestionOptionResultItem option_name="optionOne"
                                           question={question}
                                           is_winner={options.optionOne.votes.length > options.optionTwo.votes.length}
                 />
-                <QuestionOptionResultItem option={options.optionTwo}
+                <QuestionOptionResultItem option_name="optionTwo"
                                           question={question}
                                           is_winner={options.optionOne.votes.length < options.optionTwo.votes.length}
                 />

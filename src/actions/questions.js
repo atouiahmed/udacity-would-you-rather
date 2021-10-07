@@ -1,14 +1,25 @@
 import {hideLoading, showLoading} from "react-redux-loading";
-import {_getQuestions, _saveQuestionAnswer} from "../utils/_DATA";
+import {_getQuestions, _saveQuestion, _saveQuestionAnswer} from "../utils/_DATA";
 import {saveUserAnswer} from "./users";
+import questions from "../reducers/questions";
+import authedUser from "../reducers/authedUser";
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const ANSWER_QUESTION = 'ANSWER_QUESTION';
+export const SAVE_QUESTION = 'SAVE_QUESTION';
 
 export function receiveQuestions(questions) {
     return {
         type: RECEIVE_QUESTIONS,
         questions
+    }
+}
+
+export function saveQuestion(authedUser, question) {
+    return {
+        type: SAVE_QUESTION,
+        authedUser,
+        question,
     }
 }
 
@@ -27,6 +38,17 @@ export function handleQuestionsData() {
         dispatch(showLoading());
         return _getQuestions().then((questions) => {
             dispatch(receiveQuestions(questions));
+            dispatch(hideLoading());
+        })
+    }
+}
+
+export function handleCreateQuestion(authedUser,question) {
+    return (dispatch) => {
+        dispatch(showLoading());
+        return _saveQuestion(question).then((question) => {
+            console.log(question)
+            dispatch(saveQuestion(authedUser, question));
             dispatch(hideLoading());
         })
     }

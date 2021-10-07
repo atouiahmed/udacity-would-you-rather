@@ -10,7 +10,7 @@ class QuestionCard extends Component {
         const {question,users} = this.props;
         let author = users[question.author];
         return (
-            <div className="card">
+            <div className="card mt-2">
                 <div className="card-header">
                     {author.name} asks:
                 </div>

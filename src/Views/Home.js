@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import AppWrapper from "../components/AppWrapper";
 import QuestionItem from "../components/Question/QuestionItem";
 import {connect} from "react-redux";
+import _ from "lodash";
 import {handleQuestionsData} from "../actions/questions";
 
 class Home extends Component {
@@ -11,7 +12,7 @@ class Home extends Component {
     }
 
     render() {
-        const {questionsIds, questions} = this.props;
+        const {questionsIds, questions, AnsweredQuestionsIds, UnAnsweredQuestionsIds, loadingBar} = this.props;
         return (
             <AppWrapper>
 
@@ -32,19 +33,25 @@ class Home extends Component {
                 <div className="tab-content pt-3 " id="myTabContent">
 
                     <div className="tab-pane fade " id="aq" role="tabpanel" aria-labelledby="aq-tab">
-                        {questionsIds.map(q_id => {
-                            if (questions[q_id].optionOne.votes.length || questions[q_id].optionTwo.votes.length) {
+                        {!loadingBar.default && !AnsweredQuestionsIds.length ? (
+                            <p className="text-center p-3">There is no questions!</p>
+                        ) : (
+                            AnsweredQuestionsIds.map(q_id => {
+
                                 return <QuestionItem
                                     key={q_id}
                                     id={q_id}
                                 />
-                            }
-                        })}
+
+                            })
+                        )}
 
                     </div>
                     <div className="tab-pane fade show active" id="uq" role="tabpanel" aria-labelledby="uq-tab">
-                        {questionsIds.map(q_id => {
-                            if (!questions[q_id].optionOne.votes.length && !questions[q_id].optionTwo.votes.length)
+                        {!loadingBar.default && !UnAnsweredQuestionsIds.length ? (
+                            <p className="text-center p-3">There is no questions!</p>
+                        ) : (
+                            UnAnsweredQuestionsIds.map(q_id => {
                                 return (
                                     <QuestionItem
                                         key={q_id}
@@ -52,7 +59,10 @@ class Home extends Component {
                                     />
                                 )
 
-                        })}
+                            })
+                        )}
+
+
                     </div>
                 </div>
 
@@ -64,13 +74,24 @@ class Home extends Component {
 
 Home.propTypes = {};
 
-function mapStateToProps({questions, authedUser}) {
+function mapStateToProps({questions, authedUser, loadingBar}) {
     let questionsIds = Object.keys(questions);
-
+    let AnsweredQuestionsIds = [];
+    let UnAnsweredQuestionsIds = [];
+    _.forEach(questions, function (q) {
+        if (q.optionOne.votes.length || q.optionTwo.votes.length) {
+            AnsweredQuestionsIds.push(q.id);
+        } else {
+            UnAnsweredQuestionsIds.push(q.id);
+        }
+    });
     return {
         questionsIds,
+        AnsweredQuestionsIds,
+        UnAnsweredQuestionsIds,
         questions,
-        authedUser
+        authedUser,
+        loadingBar,
     }
 }
 

@@ -13,6 +13,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import {connect} from "react-redux";
 import {handleUsersData} from "./actions/users";
 import QuestionView from "./Views/QuestionView";
+import PageNotFound from "./Views/PageNotFound";
+import {Switch} from 'react-router-dom';
 
 const history = createBrowserHistory()
 
@@ -30,13 +32,15 @@ class App extends Component {
             <Router history={history}>
                 <Nav/>
                 <LoadingBar/>
-                <div>
+
+                <Switch>
                     <ProtectedRoute path="/" exact component={Home} authedUser={authedUser}/>
                     <Route path="/login" component={Login}/>
                     <ProtectedRoute path="/questions/add" component={NewQuestion} authedUser={authedUser}/>
                     <ProtectedRoute path="/leaderboard" component={LeaderBoard} authedUser={authedUser}/>
                     <ProtectedRoute path="/question/:id" component={QuestionView} authedUser={authedUser}/>
-                </div>
+                    <Route component={PageNotFound}/>
+                </Switch>
             </Router>
         )
     }

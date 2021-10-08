@@ -77,8 +77,9 @@ function mapStateToProps({questions, authedUser, loadingBar}) {
     let questionsIds = Object.keys(questions);
     let AnsweredQuestionsIds = [];
     let UnAnsweredQuestionsIds = [];
+
     _.forEach(questions, function (q) {
-        if (q.optionOne.votes.length || q.optionTwo.votes.length) {
+        if (q.optionOne.votes.indexOf(authedUser.id) > -1 || q.optionTwo.votes.indexOf(authedUser.id) > -1) {
             AnsweredQuestionsIds.push(q.id);
         } else {
             UnAnsweredQuestionsIds.push(q.id);

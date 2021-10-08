@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class QuestionOptionItem extends Component {
     handleCheck = (e) => {
-        console.log(e.target.checked);
+
     }
 
     componentDidMount() {

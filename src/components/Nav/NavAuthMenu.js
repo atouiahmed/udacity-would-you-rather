@@ -5,7 +5,7 @@ import {purgeAuthUser} from "../../actions/authedUser";
 
 class NavAuthMenu extends Component {
     componentDidMount() {
-console.log(  this.props)
+
     }
 
     doLogout = () => {

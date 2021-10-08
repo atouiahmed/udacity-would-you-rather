@@ -27,7 +27,6 @@ LeaderBoard.propTypes = {};
 
 function mapStateToProps({users, authedUser}) {
     let usersIds = Object.keys(users);
-    console.log('users', users)
     usersIds.sort((a, b) => {
         let a_score = users[a].questions.length + Object.keys(users[a].answers).length;
         let b_score = users[b].questions.length + Object.keys(users[b].answers).length;

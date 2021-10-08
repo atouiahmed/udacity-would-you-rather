@@ -45,7 +45,6 @@ export function handleCreateQuestion(authedUser,question) {
     return (dispatch) => {
         dispatch(showLoading());
         return _saveQuestion(question).then((question) => {
-            console.log(question)
             dispatch(saveQuestion(authedUser, question));
             dispatch(hideLoading());
         })

@@ -17,10 +17,16 @@ class Login extends Component {
     doLogin = (e) => {
         e.preventDefault();
         let {auth_id} = this.state;
-        let {default_auth, users} = this.props;
+        let {default_auth, users, location} = this.props;
         auth_id = auth_id ? users[auth_id] : default_auth;
         this.props.dispatch(setAuthUser(auth_id));
-        this.props.history.push(`/`)
+        console.log(this.props)
+        if (location.state.from) {
+            this.props.history.push(location.state.from.pathname);
+        } else {
+            this.props.history.push(`/`)
+        }
+        //
     }
 
     render() {
@@ -58,7 +64,7 @@ class Login extends Component {
     }
 }
 
-function mapStateToProps({users,authedUser}) {
+function mapStateToProps({users, authedUser}) {
     let usersIds = Object.keys(users);
     let default_auth = users[usersIds[0]];
     return {

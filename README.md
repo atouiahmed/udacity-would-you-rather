@@ -3,7 +3,7 @@ Udacity's React & Redux course, part of the [React Nanodegree Program](https://u
 
 ## Demo
 
-- [https://aatoui-myreads.netlify.app/](https://aatoui-myreads.netlify.app/)
+- [https://aatoui-wya.netlify.app/](https://aatoui-wya.netlify.app/)
 
 
 ## Getting Started
@@ -20,13 +20,6 @@ cd udacity-myreads
 ```
 
 Then install dependencies and start app by running these commands:
-
-```
-yarn install
-yarn start
-```
-
-or
 
 ```
 npm install

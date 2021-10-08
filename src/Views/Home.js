@@ -74,7 +74,8 @@ class Home extends Component {
 Home.propTypes = {};
 
 function mapStateToProps({questions, authedUser, loadingBar}) {
-    let questionsIds = Object.keys(questions);
+
+    let questionsIds = Object.keys(questions).sort((a, b) => questions[b].timestamp - questions[a].timestamp);
     let AnsweredQuestionsIds = [];
     let UnAnsweredQuestionsIds = [];
 
@@ -85,6 +86,9 @@ function mapStateToProps({questions, authedUser, loadingBar}) {
             UnAnsweredQuestionsIds.push(q.id);
         }
     });
+
+    AnsweredQuestionsIds = AnsweredQuestionsIds.sort((a, b) => questions[b].timestamp - questions[a].timestamp);
+    UnAnsweredQuestionsIds = UnAnsweredQuestionsIds.sort((a, b) => questions[b].timestamp - questions[a].timestamp);
     return {
         questionsIds,
         AnsweredQuestionsIds,

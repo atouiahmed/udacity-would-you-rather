@@ -4,14 +4,20 @@ import {connect} from "react-redux";
 import {handleAnswerQuestion} from "../../actions/questions";
 
 class QuestionItemForm extends Component {
+    state = {
+        answer: ''
+    }
     handleCheck = (e) => {
         let answer = e.target.value;
         this.setState({answer});
     }
     submitAnswer = (e) => {
         e.preventDefault();
-        const {dispatch, authedUser, question} = this.props;
         const {answer} = this.state;
+        const {dispatch, authedUser, question} = this.props;
+        if (answer === '') {
+            return alert('Please choose one option!')
+        }
         dispatch(handleAnswerQuestion(authedUser.id, question.id, answer))
     }
 

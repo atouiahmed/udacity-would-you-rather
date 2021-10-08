@@ -15,7 +15,6 @@ class NavAuthMenu extends Component {
 
     render() {
         const {authedUser} = this.props;
-        // console.log(authedUser)
         return (
             <ul className="navbar-nav mb-2 mb-lg-0 ms-auto me-auto">
                 {authedUser.id ? (

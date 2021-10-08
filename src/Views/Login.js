@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import AppWrapper from "../components/AppWrapper";
 import {connect} from "react-redux";
-import {handleUsersData} from "../actions/users";
 import {setAuthUser} from "../actions/authedUser";
 
 class Login extends Component {

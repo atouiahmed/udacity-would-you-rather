@@ -1,6 +1,5 @@
 import {hideLoading, showLoading} from "react-redux-loading";
 import {_getUsers} from "../utils/_DATA";
-import {ANSWER_QUESTION} from "./questions";
 
 export const RECEIVE_USERS = 'RECEIVE_USERS';
 export const SAVE_QUESTION_ANSWER = 'SAVE_QUESTION_ANSWER';

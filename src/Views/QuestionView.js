@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import AppWrapper from "../components/AppWrapper";
-import QuestionItem from "../components/Question/QuestionItem";
 import {connect} from "react-redux";
-import {handleQuestionsData, handleUsersData} from "../actions/shared";
 import {withRouter} from "react-router-dom";
 import QuestionViewItem from "../components/Question/QuestionViewItem";
 

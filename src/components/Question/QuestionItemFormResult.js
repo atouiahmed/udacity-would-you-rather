@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import QuestionOptionItem from "./QuestionOptionItem";
 import QuestionOptionResultItem from "./QuestionOptionResultItem";
 
 class QuestionItemFormResult extends Component {

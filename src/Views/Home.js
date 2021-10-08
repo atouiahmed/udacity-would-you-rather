@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import AppWrapper from "../components/AppWrapper";
 import QuestionItem from "../components/Question/QuestionItem";
 import {connect} from "react-redux";

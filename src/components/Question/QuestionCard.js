@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import QuestionOptionItem from "./QuestionOptionItem";
-import QuestionItemForm from "./QuestionItemForm";
-import QuestionItemFormResult from "./QuestionItemFormResult";
 import {connect} from "react-redux";
 
 class QuestionCard extends Component {

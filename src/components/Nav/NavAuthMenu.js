@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {NavLink, withRouter} from "react-router-dom";
-import {purgeAuthUser, setAuthUser} from "../../actions/authedUser";
+import {purgeAuthUser} from "../../actions/authedUser";
 
 class NavAuthMenu extends Component {
     componentDidMount() {

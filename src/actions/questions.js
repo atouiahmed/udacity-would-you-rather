@@ -1,8 +1,6 @@
 import {hideLoading, showLoading} from "react-redux-loading";
 import {_getQuestions, _saveQuestion, _saveQuestionAnswer} from "../utils/_DATA";
 import {saveUserAnswer} from "./users";
-import questions from "../reducers/questions";
-import authedUser from "../reducers/authedUser";
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const ANSWER_QUESTION = 'ANSWER_QUESTION';

@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
-import logo from './logo.svg';
 import './App.css';
 import Nav from "./components/Nav";
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from "./Views/Home";
 import LeaderBoard from "./Views/LeaderBoard";
 import NewQuestion from "./Views/NewQuestion";
@@ -14,7 +13,6 @@ import {connect} from "react-redux";
 import {handleUsersData} from "./actions/users";
 import QuestionView from "./Views/QuestionView";
 import PageNotFound from "./Views/PageNotFound";
-import {Switch} from 'react-router-dom';
 
 const history = createBrowserHistory()
 

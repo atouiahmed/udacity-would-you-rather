@@ -1,5 +1,4 @@
 import {RECEIVE_USERS, SAVE_QUESTION_ANSWER} from "../actions/users";
-import {ANSWER_QUESTION} from "../actions/questions";
 
 export default function users(state = {}, action) {
     switch (action.type) {

@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import QuestionOptionItem from "./QuestionOptionItem";
 import {connect} from "react-redux";
 import {handleAnswerQuestion} from "../../actions/questions";
-import authedUser from "../../reducers/authedUser";
-import QuestionItemFormResult from "./QuestionItemFormResult";
 
 class QuestionItemForm extends Component {
     handleCheck = (e) => {

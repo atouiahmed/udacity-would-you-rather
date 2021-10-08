@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import AppWrapper from "../components/AppWrapper";
 import {handleCreateQuestion} from "../actions/questions";
 import {connect} from "react-redux";
-import authedUser from "../reducers/authedUser";
 
 class NewQuestion extends Component {
 

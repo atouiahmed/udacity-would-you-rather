@@ -14,7 +14,6 @@ class QuestionViewItem extends Component {
 
     render() {
         const {question, is_answered} = this.props;
-        const {optionOne, optionTwo} = question;
         return (
             <QuestionCard question={question}>
                 {is_answered ? (

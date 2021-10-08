@@ -11,7 +11,7 @@ class Home extends Component {
     }
 
     render() {
-        const {questionsIds, questions, AnsweredQuestionsIds, UnAnsweredQuestionsIds, loadingBar} = this.props;
+        const {AnsweredQuestionsIds, UnAnsweredQuestionsIds, loadingBar} = this.props;
         return (
             <AppWrapper>
 

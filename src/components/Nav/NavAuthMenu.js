@@ -20,7 +20,7 @@ console.log(  this.props)
             <ul className="navbar-nav mb-2 mb-lg-0 ms-auto me-auto">
                 {authedUser.id ? (
                     <li className="nav-item dropdown ms-5">
-                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        <a className="nav-link dropdown-toggle" href="javascript:;" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             <img src={authedUser.avatarURL} alt="" width="30" height="30"
                                  className="d-inline-block align-text-top rounded-circle me-2"/>

@@ -21,7 +21,7 @@ class Login extends Component {
         auth_id = auth_id ? users[auth_id] : default_auth;
         this.props.dispatch(setAuthUser(auth_id));
         console.log(this.props)
-        if (location.state.from) {
+        if (location.state && location.state.from) {
             this.props.history.push(location.state.from.pathname);
         } else {
             this.props.history.push(`/`)

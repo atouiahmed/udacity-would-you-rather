@@ -3,6 +3,7 @@ import AppWrapper from "../components/AppWrapper";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import QuestionViewItem from "../components/Question/QuestionViewItem";
+import PageNotFound from "./PageNotFound";
 
 class QuestionView extends Component {
 
@@ -13,7 +14,7 @@ class QuestionView extends Component {
         const {question, match} = this.props;
         const {id} = match.params;
         if (!question) {
-            return <p className="text-center p-5">This question doesn't exist!</p>
+            return <PageNotFound/>
         }
 
         return (
